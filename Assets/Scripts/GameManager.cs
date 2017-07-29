@@ -26,7 +26,6 @@ public class GameManager : MonoBehaviour {
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
 
         // Values
         State = GameState.Loading;
