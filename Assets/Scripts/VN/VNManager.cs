@@ -8,8 +8,12 @@ public class VNManager : MonoBehaviour {
 
     public static VNManager Instance { get; private set; }
 
-    public VNImagePanel imagePanel;
-    public VNTextPanel textPanel;
+    [SerializeField]
+    private VNImagePanel imagePanel;
+    
+    [SerializeField]
+    private VNTextPanel textPanel;
+
     private Type currentActionType;
 
 	// Use this for initialization

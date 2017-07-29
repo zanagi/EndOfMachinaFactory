@@ -13,11 +13,6 @@ public class GameManager : MonoBehaviour {
     public static GameManager Instance { get; private set; }
     public GameState State { get; private set; }
     public int gameSpeed;
-    
-    [SerializeField]
-    private Transform cameraTarget, cameraBounds;
-    private Vector3 cameraMin, cameraMax;
-
     [SerializeField]
     private float cameraSpeed = 0.1f;
     
@@ -36,15 +31,6 @@ public class GameManager : MonoBehaviour {
 
         // Initial game speed
         gameSpeed = 1;
-
-        // Camera bounds
-        cameraMin = new Vector3(-0.5f * cameraBounds.localScale.x - cameraBounds.localScale.z, 0, -0.5f * cameraBounds.localScale.z);
-        cameraMax = new Vector3(0.5f * cameraBounds.localScale.x + cameraBounds.localScale.z, 0, -0.5f * cameraBounds.localScale.z);
-        
-        Debug.Log("Min: " + cameraMin);
-        Debug.Log("Max: " + cameraMax);
-        Debug.Log("Up: " + Camera.main.transform.up);
-        Debug.Log("Right: " + Camera.main.transform.right);
     }
 	
 	// Update is called once per frame

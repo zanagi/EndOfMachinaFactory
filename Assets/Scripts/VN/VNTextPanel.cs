@@ -1,5 +1,5 @@
-﻿using System.Text;
-using System.Collections;
+﻿using System;
+using System.Text;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,18 +11,22 @@ public enum TextPanelType
 
 [RequireComponent(typeof(Image))]
 public class VNTextPanel : MonoBehaviour {
-
-    // UI Text objects set in editor
-    public Text text, nameText;
-
-    // Panel sprites/backgrounds for specific situations
-    public Sprite normalBg, thinkingBg, narrationBg;
+    
+    [SerializeField]
+    private Text text, nameText;
+    
+    [SerializeField]
+    private Sprite normalBg, thinkingBg, narrationBg;
 
     public bool Animating { get; private set; }
 
     private Image background;
     private Animator animator;
     private string targetText;
+    private int textIndex;
+
+    private StringBuilder sb;
+    private string colorTagPrefix = "<color=#00000000>", colorTagSuffix = "</color>";
 
     private void Start()
     {
@@ -35,10 +39,15 @@ public class VNTextPanel : MonoBehaviour {
         if (Animating || targetText == null || targetText.Length == 0)
             return;
         
-		if(text.text.Length < targetText.Length)
+		if(textIndex < targetText.Length)
         {
-            Debug.Log("Update text");
-            text.text += targetText[text.text.Length];
+            sb = new StringBuilder();
+            sb.Append(targetText.Substring(0, textIndex + 1));
+            sb.Append(colorTagPrefix);
+            sb.Append(targetText.Substring(textIndex + 1));
+            sb.Append(colorTagSuffix);
+            text.text = sb.ToString();
+            textIndex++;
         }
 	}
 
@@ -51,8 +60,9 @@ public class VNTextPanel : MonoBehaviour {
         nameText.transform.parent.gameObject.SetActive(namePanelActive);
 
         // Update target text
-        text.text = string.Empty;
+        text.text = new string(' ', target.Length);
         targetText = target;
+        textIndex = 0;
     }
 
     public void SetTargetTextAndName(TextPanelType tpType, string target, string characterName)
@@ -102,6 +112,6 @@ public class VNTextPanel : MonoBehaviour {
 
     public bool Complete
     {
-        get { return text.text == targetText; }
+        get { return textIndex == targetText.Length; }
     }
 }
