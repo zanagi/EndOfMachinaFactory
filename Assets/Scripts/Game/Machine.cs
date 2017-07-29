@@ -10,11 +10,7 @@ public class Machine : MonoBehaviour
     [SerializeField]
     protected Resource resource;
     protected float resourceProgress;
-
-    [SerializeField]
-    private float powerConsumption = 10.0f;
-    public float PowerConsumption { get { return powerConsumption; } }
-
+    
     [SerializeField]
     protected SlideArea slideArea;
 

@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour {
     public Battery battery;
     public CycleCounter cycleCounter;
     public ResourceContainer resourceContainer;
+    public Light dLight;
 
     private void Awake () {
         if(Instance)
@@ -27,8 +28,6 @@ public class GameManager : MonoBehaviour {
             return;
         }
         Instance = this;
-
-        // Values
         State = GameState.Loading;
 
         // Initial game speed
@@ -36,10 +35,7 @@ public class GameManager : MonoBehaviour {
     }
 	
 	private void Update () {
-        if (Input.GetKeyUp(KeyCode.Escape) && !LoadingScreen.Instance.IsLoading)
-        {
-            Application.Quit();
-        }
+        // TODO: Exit handling?
     }
 
     private void LateUpdate()
@@ -58,6 +54,12 @@ public class GameManager : MonoBehaviour {
     public void SetState(GameState state)
     {
         State = state;
+    }
+
+    public void End()
+    {
+        State = GameState.Event;
+        dLight.color = Color.black;
     }
 
     public bool Idle

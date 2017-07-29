@@ -16,7 +16,7 @@ public class ResourceObject : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(!slideArea)
+        if(!slideArea || !GameManager.Instance.Idle)
             return;
 
         if ((slideArea.end.position - transform.position).sqrMagnitude <= Slide.sqrSpeed)

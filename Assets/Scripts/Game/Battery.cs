@@ -20,5 +20,10 @@ public class Battery : MonoBehaviour
     {
         currentPower -= consumption * GameManager.Instance.gameSpeed;
         fillImage.fillAmount = currentPower / maxPower;
+
+        if(currentPower <= 0)
+        {
+            GameManager.Instance.End();
+        }
     }
 }

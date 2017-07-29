@@ -16,6 +16,9 @@ public class Slide : MonoBehaviour {
 	}
 
     private void FixedUpdate () {
+        if (!GameManager.Instance.Idle)
+            return;
+
         offset += speed;
 
         if (offset >= 1)

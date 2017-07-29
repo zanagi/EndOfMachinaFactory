@@ -14,9 +14,6 @@ public class Factory : MonoBehaviour
     private void Start()
     {
         machines = machineContainer.GetComponentsInChildren<Machine>();
-
-        foreach (var machine in machines)
-            powerConsumption += machine.PowerConsumption;
     }
 
     // Update is called once per frame
