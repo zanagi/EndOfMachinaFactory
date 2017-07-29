@@ -12,13 +12,21 @@ public class InputHandler : MonoBehaviour
     } 
     public Vector3 TouchPosition { get; private set; }
     public Vector3 PreviousTouchPosition { get; private set; }
-    private int fingerId;
 
-    // Swipe
-    private float swipeResistance = 50;
-    private Vector2 swipeModifier = new Vector2(1.0f, 1.5f);
-    public bool Swiped { get; private set; }
-    public Vector2 SwipeDirection { get; private set; }
+    // Key Input
+    // Up, right, down, left
+    private bool[] arrowKeyPress = new bool[4];
+    private KeyCode[] keyCodes = { KeyCode.UpArrow, KeyCode.RightArrow, KeyCode.DownArrow, KeyCode.LeftArrow };
+
+    public bool IsKeyDown(KeyCode keyCode)
+    {
+        for(int i = 0; i < keyCodes.Length; i++)
+        {
+            if (keyCode == keyCodes[i])
+                return arrowKeyPress[i];
+        }
+        return false;
+    }
 
     public static InputHandler Instance { get; private set; }
 
@@ -36,55 +44,11 @@ public class InputHandler : MonoBehaviour
     {
         PreviousTouch = Touched;
         PreviousTouchPosition = TouchPosition;
+		Touched = Input.GetMouseButton(0);
+		TouchPosition = Input.mousePosition;
 
-        // Touch input
-		if (Application.isMobilePlatform) {
-            HandleMobileTouch();
-        } else {
-			// Non-mobile
-			Touched = Input.GetMouseButton(0);
-			TouchPosition = Input.mousePosition;
-		}
-		CheckSwipe();
-    }
-
-    private void HandleMobileTouch()
-    {
-        if (!Touched)
-        {
-            for (int i = 0; i < Input.touchCount; i++)
-            {
-                if (Input.GetTouch(i).phase == TouchPhase.Began && !TouchedOverUI)
-                {
-                    Touched = true;
-                    fingerId = Input.GetTouch(i).fingerId;
-                    TouchPosition = Input.GetTouch(i).position;
-                    return;
-                }
-            }
-            return;
-        }
-        for (int i = 0; i < Input.touchCount; i++)
-        {
-            if (Input.GetTouch(i).fingerId == fingerId)
-            {
-                if (Input.GetTouch(i).phase == TouchPhase.Ended)
-                    Touched = false;
-                else
-                    TouchPosition = Input.GetTouch(i).position;
-                return;
-            }
-        }
-    }
-
-    private void CheckSwipe()
-    {
-		if (!Touched && PreviousTouch)
-        {
-			SwipeDirection = TouchPosition - PreviousTouchPosition;
-            Swiped = (Mathf.Abs(SwipeDirection.x * swipeModifier.x) + Mathf.Abs(SwipeDirection.y * swipeModifier.y) >= swipeResistance);
-             return;
-        }
-        Swiped = false;
+        // Key input
+        for (int i = 0; i < arrowKeyPress.Length; i++)
+            arrowKeyPress[i] = (arrowKeyPress[i] && !Input.GetKeyUp(keyCodes[i])) || (!arrowKeyPress[i] && Input.GetKeyDown(keyCodes[i]));
     }
 }

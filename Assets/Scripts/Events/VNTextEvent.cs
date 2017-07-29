@@ -64,10 +64,16 @@ public class VNTextEvent : MiniEvent
             }
             VNManager.Instance.Hide();
             hideStarted = true;
+
+            // Event over, set idle state
+            GameManager.Instance.SetState(GameState.Idle);
             return;
         }
         VNManager.Instance.SetAction(actions[unitIndex]);
         actionActive = true;
+
+        // Set event state
+        GameManager.Instance.SetState(GameState.Event);
     }
 
     protected override void LateUpdate()

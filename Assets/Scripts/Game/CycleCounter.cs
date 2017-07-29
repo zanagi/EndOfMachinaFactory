@@ -14,15 +14,15 @@ public class CycleCounter : MonoBehaviour {
     [SerializeField]
     private float cycleLength;
 
-    [SerializeField]
-    private int cycleSpeed = 1;
-
     private float currentCycleTime;
     private int cycleCount;
     
 	// Update is called once per frame
 	void FixedUpdate () {
-        currentCycleTime += Time.fixedDeltaTime * cycleSpeed;
+        if (GameManager.Instance.State != GameState.Idle)
+            return;
+
+        currentCycleTime += Time.fixedDeltaTime * GameManager.Instance.gameSpeed;
         
         if(currentCycleTime >= cycleLength)
         {
