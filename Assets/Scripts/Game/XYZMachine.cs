@@ -6,7 +6,7 @@ public class XYZMachine : Machine
     private static readonly int requiredResourceCount = 10;
     private bool resourcesTaken = true;
 
-    public override void AddProgress(int amount)
+    public override void AddProgress(float amount)
     {
         if (amount <= 0)
             return;
@@ -25,7 +25,7 @@ public class XYZMachine : Machine
         if (resourceProgress >= requiredResourceProgress)
         {
             resourceProgress = 0; // Not a basic resource, so set progress to zero after completion
-            GameManager.Instance.resourceContainer.AddResource(resource);
+            GameManager.Instance.resourceContainer.AddResource(resource, slideArea);
             resourcesTaken = false;
         }
     }

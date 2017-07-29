@@ -40,10 +40,10 @@ public class Factory : MonoBehaviour
 
             if (Physics.Raycast(Camera.main.ScreenPointToRay(InputHandler.Instance.TouchPosition), out hit, 100.0f))
             {
-                Machine machine = hit.transform.GetComponent<Machine>();
-                if(machine)
+                Robot robot = hit.transform.GetComponent<Robot>();
+                if(robot)
                 {
-                    Debug.Log("Clicked: " + machine.name);
+                    Debug.Log("Clicked: " + robot.name);
                 }
             }
         }

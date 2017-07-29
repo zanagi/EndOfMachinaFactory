@@ -5,9 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(MeshRenderer))]
 public class Slide : MonoBehaviour {
 
+    public static readonly float speed = 0.03f;
+    public static readonly float sqrSpeed = speed * speed;
+
     private MeshRenderer meshRenderer;
-    [SerializeField]
-    private float speed = 0.01f;
     private float offset;
 
     private void Start () {

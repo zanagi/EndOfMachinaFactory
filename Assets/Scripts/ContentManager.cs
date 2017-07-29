@@ -12,6 +12,9 @@ public class ContentManager : MonoBehaviour
     // Array of sprites used in the game, set in the editor
     public Sprite[] sprites;
 
+    // Resource object prefabs
+    public ResourceObject xResourceObject, yResourceObject, zResourceObject;
+
     void Awake()
     {
         if (Instance)

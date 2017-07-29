@@ -23,7 +23,7 @@ public class Robot : MonoBehaviour
         if (!GameManager.Instance.Idle)
             return;
 
-        machine.AddProgress(proficiency);
+        machine.AddProgress(Random.Range(0.5f * proficiency, 1.5f * proficiency));
         currentPower -= consumption;
 
         if (currentPower <= 0)
