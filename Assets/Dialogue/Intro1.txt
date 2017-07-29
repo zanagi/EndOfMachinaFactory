@@ -1,11 +1,3 @@
-* sakura_petal ; all
-
-Pao; Hey Daddy! Hey Daddy!
-Pao; I wanna hear another story! About your great adventures!
-
-* Hide ; all
-* sakura_petal ; all
-
-Pao's Dad; Ho ho ho! Very well, my son! 
-
-* Hide ; all
+???; Awakening sequence started. Systems all green.
+???; asdasfasfas
+???;; ...

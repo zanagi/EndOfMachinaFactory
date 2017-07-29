@@ -37,6 +37,7 @@ public class VNTextPanel : MonoBehaviour {
         
 		if(text.text.Length < targetText.Length)
         {
+            Debug.Log("Update text");
             text.text += targetText[text.text.Length];
         }
 	}
@@ -58,7 +59,7 @@ public class VNTextPanel : MonoBehaviour {
     {
         if (!animator)
             Start();
-
+        
         // Check animation
         if (!gameObject.activeSelf)
         {
