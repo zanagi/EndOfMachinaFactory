@@ -6,7 +6,7 @@ public class Machine : MonoBehaviour
     public bool On { get; private set; }
 
     [SerializeField]
-    private float consumption;
-    public float Consumption { get { return consumption; } }
+    private float powerConsumption = 10.0f;
+    public float PowerConsumption { get { return powerConsumption; } }
     
 }

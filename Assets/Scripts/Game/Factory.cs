@@ -9,17 +9,14 @@ public class Factory : MonoBehaviour
 
     [SerializeField]
     private float powerConsumption; // Power consumption of factory itself set in editor
-
-    // Mouse input
-    private Vector3 previousClickPosition = Vector3.one * -1.0f;
-
+    
     // Use this for initialization
     private void Start()
     {
         machines = machineContainer.GetComponentsInChildren<Machine>();
 
         foreach (var machine in machines)
-            powerConsumption += machine.Consumption;
+            powerConsumption += machine.PowerConsumption;
     }
 
     // Update is called once per frame
