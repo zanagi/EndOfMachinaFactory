@@ -12,12 +12,12 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager Instance { get; private set; }
     public GameState State { get; private set; }
-    public int gameSpeed;
 
-    [SerializeField]
-    private float cameraSpeed = 0.1f;
+    // Editor values
+    public int gameSpeed;
+    public Battery battery;
+    public CycleCounter cycleCounter;
     
-    // Use this for initialization
     private void Awake () {
         if(Instance)
         {
@@ -34,7 +34,6 @@ public class GameManager : MonoBehaviour {
         gameSpeed = 1;
     }
 	
-	// Update is called once per frame
 	private void Update () {
         if (Input.GetKeyUp(KeyCode.Escape) && !LoadingScreen.Instance.IsLoading)
         {

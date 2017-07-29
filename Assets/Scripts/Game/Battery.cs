@@ -9,25 +9,16 @@ public class Battery : MonoBehaviour
 
     [SerializeField]
     private float maxPower;
-    private float currentPower, powerConsumption = 1.0f;
+    private float currentPower;
 
     private void Start()
     {
         currentPower = maxPower;
     }
-
-    // Update is called once per frame
-    void FixedUpdate()
+    
+    public void UpdatePower(float consumption)
     {
-        if (GameManager.Instance.State != GameState.Idle)
-            return;
-
-        currentPower -= powerConsumption * GameManager.Instance.gameSpeed;
+        currentPower -= consumption * GameManager.Instance.gameSpeed;
         fillImage.fillAmount = currentPower / maxPower;
-    }
-
-    public void SetConsumption(float consumption)
-    {
-        powerConsumption = consumption;
     }
 }
