@@ -14,7 +14,9 @@ public class VNImagePanel : MonoBehaviour
     public bool Complete { get; private set; } // Is last action complete?
 
     [SerializeField]
-    private VNImage left, right;
+    private VNImage left;
+    [SerializeField]
+    private VNImage right;
 
     private VNImage target;
     private Sprite nextSprite;

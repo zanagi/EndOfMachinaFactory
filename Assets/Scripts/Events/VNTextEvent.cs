@@ -92,7 +92,7 @@ public class VNTextEvent : MiniEvent
         if (VNManager.Instance.CurrentActionIsText)
         {
             // Text event
-            if (InputHandler.Instance.TouchReleased)
+            if (InputHandler.Instance.Clicked)
             {
                 if (VNManager.Instance.ActionComplete)
                 {

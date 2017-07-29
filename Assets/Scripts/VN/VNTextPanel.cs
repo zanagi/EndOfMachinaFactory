@@ -13,10 +13,15 @@ public enum TextPanelType
 public class VNTextPanel : MonoBehaviour {
     
     [SerializeField]
-    private Text text, nameText;
-    
+    private Text text;
     [SerializeField]
-    private Sprite normalBg, thinkingBg, narrationBg;
+    private Text nameText;
+    [SerializeField]
+    private Sprite normalBg;
+    [SerializeField]
+    private Sprite thinkingBg;
+    [SerializeField]
+    private Sprite narrationBg;
 
     public bool Animating { get; private set; }
 

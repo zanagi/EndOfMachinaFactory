@@ -19,7 +19,7 @@ public class CycleCounter : MonoBehaviour {
     
 	// Update is called once per frame
 	void FixedUpdate () {
-        if (GameManager.Instance.State != GameState.Idle)
+        if (!GameManager.Instance.Idle)
             return;
 
         currentCycleTime += Time.fixedDeltaTime * GameManager.Instance.gameSpeed;

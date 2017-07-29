@@ -7,6 +7,6 @@ public class Machine : MonoBehaviour
 
     [SerializeField]
     private float consumption;
-    public float Consumption { get { return On ? consumption : 0; } }
+    public float Consumption { get { return consumption; } }
     
 }

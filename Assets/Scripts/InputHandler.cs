@@ -5,7 +5,7 @@ public class InputHandler : MonoBehaviour
 {
     public bool Touched { get; private set; }
     public bool PreviousTouch { get; private set; }
-    public bool TouchReleased { get { return !Touched && PreviousTouch; } }
+    public bool Clicked { get { return !Touched && PreviousTouch; } }
     public bool TouchedOverUI
     {
         get { return EventSystem.current.IsPointerOverGameObject(); }

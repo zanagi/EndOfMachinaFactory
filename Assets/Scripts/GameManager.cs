@@ -15,9 +15,10 @@ public class GameManager : MonoBehaviour {
 
     // Editor values
     public int gameSpeed;
+    public Transform canvasTransform;
     public Battery battery;
     public CycleCounter cycleCounter;
-    
+
     private void Awake () {
         if(Instance)
         {
@@ -43,7 +44,7 @@ public class GameManager : MonoBehaviour {
 
     private void LateUpdate()
     {
-        if (State != GameState.Idle)
+        if (!Idle)
             return;
 
         CheckKeyInput();
@@ -57,5 +58,10 @@ public class GameManager : MonoBehaviour {
     public void SetState(GameState state)
     {
         State = state;
+    }
+
+    public bool Idle
+    {
+        get { return State == GameState.Idle; }
     }
 }
