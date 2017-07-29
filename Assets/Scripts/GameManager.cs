@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager Instance { get; private set; }
     public GameState State { get; private set; }
     public int gameSpeed;
+
     [SerializeField]
     private float cameraSpeed = 0.1f;
     
@@ -37,12 +38,6 @@ public class GameManager : MonoBehaviour {
 	private void Update () {
         if (Input.GetKeyUp(KeyCode.Escape) && !LoadingScreen.Instance.IsLoading)
         {
-            // TODO: Replace with proper exit logic
-            if(LoadingManager.Instance.ActiveSceneName != Scenes.Intro)
-            {
-                LoadingManager.Instance.LoadScene(Scenes.Intro, LoadingStyle.ExpandAndShrink);
-                return;
-            }
             Application.Quit();
         }
     }
