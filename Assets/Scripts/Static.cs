@@ -9,4 +9,9 @@ public static class Static
         chars[index] = newChar;
         return new string(chars);
     }
+
+    public static bool IsBasic(this Resource resource)
+    {
+        return resource != Resource.XYZ;
+    }
 }

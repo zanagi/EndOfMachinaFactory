@@ -18,6 +18,7 @@ public class ResourceCounter : MonoBehaviour {
     private Text numberText;
     [SerializeField]
     private int resourceCount = 50; // Initial resource count set in editor
+    public int ResourceCount { get { return resourceCount; } }
 
     private void Start()
     {

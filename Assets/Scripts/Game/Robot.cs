@@ -8,9 +8,9 @@ public class Robot : MonoBehaviour
     [SerializeField]
     private int proficiency = 1;
     [SerializeField]
-    private float consumption;
+    private float consumption = 1.0f;
     [SerializeField]
-    private float maxPower;
+    private float maxPower = 1000.0f;
     private float currentPower;
 
     private void Start()
@@ -29,8 +29,6 @@ public class Robot : MonoBehaviour
         if (currentPower <= 0)
         {
             currentPower = 0;
-
-            // TODO: BB event
         }
     }
 

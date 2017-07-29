@@ -22,4 +22,23 @@ public class ResourceContainer : MonoBehaviour
             }
         }
     }
+
+    public bool HasBasicResources(int count)
+    {
+        foreach (var counter in counters)
+        {
+            if (counter.resource.IsBasic() && counter.ResourceCount < count)
+                return false;
+        }
+        return true;
+    }
+
+    public void TakeBasicResources(int count)
+    {
+        foreach (var counter in counters)
+        {
+            if (counter.resource.IsBasic())
+                counter.ChangeResourceCount(-count);
+        }
+    }
 }

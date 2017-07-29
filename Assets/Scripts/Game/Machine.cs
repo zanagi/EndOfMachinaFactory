@@ -3,22 +3,23 @@ using System.Collections;
 
 public class Machine : MonoBehaviour
 {
-    private static int requiredResourceProgress = 1000;
+    protected static int requiredResourceProgress = 100;
 
     public bool On { get; private set; }
 
     [SerializeField]
-    private Resource resource;
-    private int resourceProgress;
+    protected Resource resource;
+    protected int resourceProgress;
 
     [SerializeField]
     private float powerConsumption = 10.0f;
     public float PowerConsumption { get { return powerConsumption; } }
     
-    public void AddProgress(int amount)
+    public virtual void AddProgress(int amount)
     {
         if (amount <= 0)
             return;
+
         resourceProgress += amount;
 
         if(resourceProgress >= requiredResourceProgress)
