@@ -11,9 +11,9 @@ public enum Resource
 public class ResourceCounter : MonoBehaviour {
 
     private static readonly int maxResourceAmount = 99;
+    
+    public Resource resource;
 
-    [SerializeField]
-    private Resource resource;
     [SerializeField]
     private Text numberText;
     [SerializeField]

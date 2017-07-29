@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour {
     public Transform canvasTransform;
     public Battery battery;
     public CycleCounter cycleCounter;
+    public ResourceContainer resourceContainer;
 
     private void Awake () {
         if(Instance)

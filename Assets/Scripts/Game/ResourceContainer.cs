@@ -11,9 +11,15 @@ public class ResourceContainer : MonoBehaviour
         counters = GetComponentsInChildren<ResourceCounter>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AddResource(Resource resource)
     {
-
+        foreach(var counter in counters)
+        {
+            if(counter.resource == resource)
+            {
+                counter.ChangeResourceCount(1);
+                return;
+            }
+        }
     }
 }
