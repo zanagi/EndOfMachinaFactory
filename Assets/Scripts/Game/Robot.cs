@@ -4,6 +4,7 @@ using System.Collections;
 public class Robot : MonoBehaviour
 {
     private static float sleepModifier = 0.2f;
+    private static string fallAnimName = "Fall", riseAnimName = "Rise";
 
     public Transform modelTransform;
 
@@ -38,6 +39,12 @@ public class Robot : MonoBehaviour
     // Animator
     private Animator animator;
 
+    // Particles
+    [SerializeField]
+    private GameObject sleepPS;
+    [SerializeField]
+    private GameObject transferPS;
+
     private void Start()
     {
         currentPower = maxPower;
@@ -47,7 +54,10 @@ public class Robot : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         if (!GameManager.Instance.Idle || IsDead)
+        {
+            StopParticles();
             return;
+        }
 
         if (sleeping)
         {
@@ -58,6 +68,9 @@ public class Robot : MonoBehaviour
             currentPower -= consumption;
             machine.AddProgress(Random.Range(0.5f * proficiency, 1.5f * proficiency));
         }
+        // Update particle system activity
+        sleepPS.SetActive(sleeping);
+        transferPS.SetActive(!sleeping);
 
         // Check if out of power
         if (currentPower <= 0)
@@ -66,11 +79,17 @@ public class Robot : MonoBehaviour
 
             if(!sleeping)
             {
-                animator.Play("Fall");
+                animator.Play(fallAnimName);
             }
+            StopParticles();
         }
     }
 
+    private void StopParticles()
+    {
+        sleepPS.SetActive(false);
+        transferPS.SetActive(false);
+    }
 
     public void SetProficiency(int proficiency)
     {
@@ -89,5 +108,11 @@ public class Robot : MonoBehaviour
 
         Instantiate(idleEvent, transform);
         GameManager.Instance.SetState(GameState.Event);
+    }
+
+    public void SwapSleep()
+    {
+        sleeping = !sleeping;
+        animator.Play(sleeping ? fallAnimName : riseAnimName);
     }
 }

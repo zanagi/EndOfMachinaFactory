@@ -8,17 +8,21 @@ public class RobotInfoWindow : MonoBehaviour
 
     [SerializeField]
     private Robot robot;
-
     [SerializeField]
     private Image batteryFill;
-    
+    [SerializeField]
+    private Button sleepButton;
+    [SerializeField]
+    private Button transferButton;
+
     private void Update()
     {
-        if (!GameManager.Instance.Idle)
+        if (!GameManager.Instance.Idle || !robot)
             return;
 
         UpdatePosition();
         UpdateBattery();
+        UpdateButtons();
     }
 
     private void UpdatePosition()
@@ -29,6 +33,12 @@ public class RobotInfoWindow : MonoBehaviour
     private void UpdateBattery()
     {
         batteryFill.fillAmount = robot.PowerRatio;
+    }
+
+    private void UpdateButtons()
+    {
+        sleepButton.interactable = !robot.IsDead;
+        transferButton.interactable = !robot.IsDead;
     }
 
     public void Close()
@@ -53,5 +63,10 @@ public class RobotInfoWindow : MonoBehaviour
     public void ActivateDialogue()
     {
         robot.ActivateDialogue();
+    }
+
+    public void SwapRobotSleep()
+    {
+        robot.SwapSleep();
     }
 }
