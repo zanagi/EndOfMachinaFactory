@@ -7,19 +7,26 @@ public class EventNotification : MonoBehaviour
 
     public Robot robot;
     private Transform backTransform, frontTransform;
+    private Animator animator;
 
     // Update is called once per frame
     void Update()
     {
-        if(!robot)
+        if (!animator)
+            animator = GetComponent<Animator>();
+        if (!robot)
         {
             gameObject.SetActive(false);
             return;
         }
-        if(!GameManager.Instance.Idle)
+        if (!GameManager.Instance.Idle)
+        {
+            animator.speed = 0.0f;
             return;
+        }
+        animator.speed = 1.0f;
 
-        if(GameManager.Instance.robotWindow.gameObject.activeSelf && GameManager.Instance.robotWindow.robot == robot)
+        if (GameManager.Instance.robotWindow.gameObject.activeSelf && GameManager.Instance.robotWindow.robot == robot)
         {
             transform.SetParent(frontTransform, true);
             transform.position = GameManager.Instance.robotWindow.TalkIconPosition;

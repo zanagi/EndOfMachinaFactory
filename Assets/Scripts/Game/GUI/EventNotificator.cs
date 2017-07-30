@@ -28,7 +28,7 @@ public class EventNotificator : MonoBehaviour {
     {
         foreach (var temp in notifications)
         {
-            if (temp.robot == robot)
+            if (temp && temp.robot == robot)
             {
                 Destroy(temp.gameObject);
                 notifications.Remove(temp);

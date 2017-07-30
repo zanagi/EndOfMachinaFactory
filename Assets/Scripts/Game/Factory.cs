@@ -30,6 +30,13 @@ public class Factory : MonoBehaviour
                 if(robot)
                 {
                     GameManager.Instance.robotWindow.SetRobot(robot);
+                    return;
+                }
+                ClickEventTrigger cet = hit.transform.GetComponent<ClickEventTrigger>();
+                if(cet)
+                {
+                    cet.TriggerEvent();
+                    return;
                 }
             }
         }
