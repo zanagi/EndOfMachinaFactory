@@ -4,14 +4,26 @@ using UnityEngine;
 
 public abstract class MiniEvent : MonoBehaviour
 {
+    public bool active = true;
     public bool Complete { get; protected set; }
-    public MiniEvent previousEvent;
-    public float delay;
-    
+
+    [SerializeField]
+    protected MiniEvent nextEvent;
+    [SerializeField]
+    protected float delay;
+
     protected virtual void CompleteEvent()
     {
         Complete = true;
         Destroy(gameObject);
+
+        if(nextEvent)
+        {
+            nextEvent.active = true;
+        } else
+        {
+            GameManager.Instance.SetState(GameState.Idle);
+        }
     }
 
     protected virtual void LateUpdate()
@@ -27,7 +39,7 @@ public abstract class MiniEvent : MonoBehaviour
     {
         get
         {
-            if (previousEvent || Complete || LoadingScreen.Instance.IsLoading)
+            if (!active || Complete || LoadingScreen.Instance.IsLoading)
                 return false;
             return true;
         }

@@ -17,7 +17,7 @@ public class RobotInfoWindow : MonoBehaviour
     [SerializeField]
     private Button transferButton;
     
-    private void Update()
+    public void Update()
     {
         if (!robot)
         {

@@ -42,6 +42,7 @@ public class Robot : MonoBehaviour
     // Animator
     private Animator animator;
     private bool animationPaused;
+    private bool deathHandled;
 
     // Particles
     [SerializeField]
@@ -73,7 +74,7 @@ public class Robot : MonoBehaviour
             animator.speed = 1.0f;
         }
         // Check if out of power
-        if (IsDead)
+        if (IsDead && !deathHandled)
         {
             HandleDeath();
             return;
@@ -141,6 +142,8 @@ public class Robot : MonoBehaviour
     {
         GameManager.Instance.battery.AddPower(currentPower);
         currentPower = 0;
+        HandleDeath();
+        GameManager.Instance.robotWindow.Update();
     }
 
     public void End()
@@ -157,5 +160,6 @@ public class Robot : MonoBehaviour
             animator.Play(fallAnimName);
         }
         StopParticles();
+        deathHandled = true;
     }
 }

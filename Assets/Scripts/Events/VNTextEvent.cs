@@ -54,7 +54,10 @@ public class VNTextEvent : MiniEvent
         if (!CanUpdate || actionActive)
             return;
 
-        if(actions.Count == unitIndex)
+        if(GameManager.Instance.Idle)
+            GameManager.Instance.SetState(GameState.Event);
+
+        if (actions.Count == unitIndex)
         {
             if(hideStarted)
             {
@@ -63,17 +66,11 @@ public class VNTextEvent : MiniEvent
                 return;
             }
             VNManager.Instance.Hide();
-            hideStarted = true;
-
-            // Event over, set idle state
-            GameManager.Instance.SetState(GameState.Idle);
+            hideStarted = true;;
             return;
         }
         VNManager.Instance.SetAction(actions[unitIndex]);
         actionActive = true;
-
-        // Set event state
-        GameManager.Instance.SetState(GameState.Event);
     }
 
     protected override void LateUpdate()
