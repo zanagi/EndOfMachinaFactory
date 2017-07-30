@@ -1,8 +1,10 @@
 * xrobot; right
 X-Robot 1; I see... So my time has come.
+* meccha; left
 Meccha; X-Robot 1...
 Meccha; I'm sorry.
 X-Robot 1; Don't be, Chief. Anything for you and the Xs!
 * hide; right
 .......................................................
 X-Robot 1 transferred all of it's energy to the factory.
+* hide; left

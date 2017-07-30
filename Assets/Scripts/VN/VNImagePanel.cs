@@ -20,7 +20,7 @@ public class VNImagePanel : MonoBehaviour
 
     private VNImage target;
     private Sprite nextSprite;
-    private static readonly string hideKeyword = "Hide";
+    private static readonly string hideKeyword = "hide";
 
     public void SetImage(string name, ImagePanelPosition position)
     {

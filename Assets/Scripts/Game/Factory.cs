@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using System.Collections.Generic;
 
 public class Factory : MonoBehaviour
@@ -20,7 +21,7 @@ public class Factory : MonoBehaviour
         if (!GameManager.Instance.Idle)
             return;
 
-        if(InputHandler.Instance.Clicked)
+        if(InputHandler.Instance.Clicked && !EventSystem.current.IsPointerOverGameObject())
         {
             // Raycast to see if machine/robot clicked
             RaycastHit hit;
