@@ -1,6 +1,6 @@
-The XYZ Robot; Hey, Chief!
-The XYZ Robot; I'm sure you know this but making XYZs requires 5 Xs, Ys, Zs each.
-The XYZ Robot; When there is not enough items you should put me to sleep so that I won't waste my energy.
-The XYZ Robot; Oh! But don't forget to wake me up! I'm THE only XYZ robot in factory after all.
+The XYZ; Hey, Chief!
+The XYZ; I'm sure you know this but making XYZs requires 5 Xs, Ys, Zs each.
+The XYZ; When there is not enough items you should put me to sleep so that I won't waste my energy.
+The XYZ; Oh! But don't forget to wake me up! I'm THE only XYZ robot in factory after all.
 You can put a robot to sleep by clicking the sleep icon on its window.
 Robots that are asleep use less energy so remember to put robots to sleep when they are not needed.
