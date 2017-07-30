@@ -110,6 +110,11 @@ public class Robot : MonoBehaviour
         GameManager.Instance.SetState(GameState.Event);
     }
 
+    public void End()
+    {
+        animator.Play(fallAnimName);
+    }
+
     public void SwapSleep()
     {
         sleeping = !sleeping;

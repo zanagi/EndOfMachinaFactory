@@ -61,6 +61,11 @@ public class GameManager : MonoBehaviour {
     {
         State = GameState.Event;
         dLight.color = Color.black;
+        AudioManager.Instance.PlayAudio("Shutdown");
+
+        var robots = FindObjectsOfType<Robot>();
+        foreach (var robot in robots)
+            robot.End();
     }
 
     public bool Idle

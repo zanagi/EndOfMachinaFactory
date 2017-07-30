@@ -11,9 +11,16 @@ public class RobotInfoWindow : MonoBehaviour
     [SerializeField]
     private Image batteryFill;
     [SerializeField]
+    private Button talkButton;
+    [SerializeField]
     private Button sleepButton;
     [SerializeField]
     private Button transferButton;
+
+    private void Start()
+    {
+        gameObject.SetActive(false);
+    }
 
     private void Update()
     {
@@ -37,8 +44,9 @@ public class RobotInfoWindow : MonoBehaviour
 
     private void UpdateButtons()
     {
+        talkButton.interactable = !robot.IsSleeping;
         sleepButton.interactable = !robot.IsDead;
-        transferButton.interactable = !robot.IsDead;
+        transferButton.interactable = !robot.IsDead && !robot.IsSleeping;
     }
 
     public void Close()
