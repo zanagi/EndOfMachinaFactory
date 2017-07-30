@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Robot : MonoBehaviour
 {
+    private static float sleepModifier = 0.2f;
+
     public Transform modelTransform;
 
     [SerializeField]
@@ -19,29 +21,56 @@ public class Robot : MonoBehaviour
     {
         get { return currentPower / maxPower; }
     }
+    public bool IsDead
+    {
+        get { return currentPower <= 0; }
+    }
+    private bool sleeping;
+    public bool IsSleeping
+    {
+        get { return sleeping; }
+    }
 
     // VN
     [SerializeField]
     private VNTextEvent idleEvent;
 
+    // Animator
+    private Animator animator;
+
     private void Start()
     {
         currentPower = maxPower;
+        animator = GetComponentInParent<Animator>();
     }
 
     protected virtual void FixedUpdate()
     {
-        if (!GameManager.Instance.Idle)
+        if (!GameManager.Instance.Idle || IsDead)
             return;
 
-        machine.AddProgress(Random.Range(0.5f * proficiency, 1.5f * proficiency));
-        currentPower -= consumption;
+        if (sleeping)
+        {
+            currentPower -= consumption * sleepModifier;
+        }
+        else
+        {
+            currentPower -= consumption;
+            machine.AddProgress(Random.Range(0.5f * proficiency, 1.5f * proficiency));
+        }
 
+        // Check if out of power
         if (currentPower <= 0)
         {
             currentPower = 0;
+
+            if(!sleeping)
+            {
+                animator.Play("Fall");
+            }
         }
     }
+
 
     public void SetProficiency(int proficiency)
     {
