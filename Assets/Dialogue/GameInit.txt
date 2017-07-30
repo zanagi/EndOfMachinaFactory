@@ -1,0 +1,4 @@
+The end of Machina Factory is coming. You must generate as much value as possible before the power runs out.
+Making Xs, Ys and Zs generates some value. Making XYZs generates a lot of value!
+Click on worker robots to affect their behaviour.
+Note that machines will generate their respective items only when there is a robot working on it.

@@ -6,8 +6,7 @@ public class RobotInfoWindow : MonoBehaviour
 {
     private static Vector3 positionToRobot = new Vector3(0, 25, 0);
 
-    [SerializeField]
-    private Robot robot;
+    public Robot robot;
     [SerializeField]
     private Image batteryFill;
     [SerializeField]
@@ -17,6 +16,11 @@ public class RobotInfoWindow : MonoBehaviour
     [SerializeField]
     private Button transferButton;
     
+    public Vector3 TalkIconPosition
+    {
+        get { return talkButton.transform.position; }
+    }
+
     public void Update()
     {
         if (!robot)
@@ -49,9 +53,9 @@ public class RobotInfoWindow : MonoBehaviour
         transferButton.interactable = !robot.IsDead && !robot.IsSleeping;
     }
 
-    public void Close()
+    public void Close(bool end = false)
     {
-        if (!GameManager.Instance.Idle)
+        if (!GameManager.Instance.Idle && !end)
             return;
 
         gameObject.SetActive(false);

@@ -4,18 +4,8 @@ using System.Collections.Generic;
 public class Factory : MonoBehaviour
 {
     [SerializeField]
-    private GameObject machineContainer;
-    private Machine[] machines;
-
-    [SerializeField]
     private float powerConsumption; // Power consumption of factory itself set in editor
     
-    // Use this for initialization
-    private void Start()
-    {
-        machines = machineContainer.GetComponentsInChildren<Machine>();
-    }
-
     // Update is called once per frame
     private void Update()
     {
@@ -43,10 +33,5 @@ public class Factory : MonoBehaviour
                 }
             }
         }
-    }
-
-    public void TurnOffMachine(Machine machine)
-    {
-
     }
 }

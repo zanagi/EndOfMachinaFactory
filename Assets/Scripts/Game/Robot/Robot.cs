@@ -4,7 +4,7 @@ using System.Collections;
 public class Robot : MonoBehaviour
 {
     private static float sleepModifier = 0.2f;
-    private static string fallAnimName = "Fall", riseAnimName = "Rise", idleAnimName="Idle";
+    private static string fallAnimName = "Fall", riseAnimName = "Rise";
 
     public Transform modelTransform;
 
@@ -38,10 +38,11 @@ public class Robot : MonoBehaviour
     private GameObject transferEvent;
     [SerializeField]
     private GameObject deathEvent;
+    private GameObject nextEventPrefab;
 
     // Animator
     private Animator animator;
-    private bool animationPaused, deathHandled, hasNewEvent;
+    private bool animationPaused, deathHandled;
 
     // Particles
     [SerializeField]
@@ -73,9 +74,12 @@ public class Robot : MonoBehaviour
             animator.speed = 1.0f;
         }
         // Check if out of power
-        if (IsDead && !deathHandled)
+        if (IsDead)
         {
-            HandleDeath();
+            if (!deathHandled)
+            {
+                HandleDeath();
+            }
             return;
         }
 
@@ -116,6 +120,12 @@ public class Robot : MonoBehaviour
 
         if(IsDead)
             Instantiate(deathEvent, transform);
+        else if(nextEventPrefab != null)
+        {
+            Instantiate(nextEventPrefab, transform);
+            nextEventPrefab = null;
+            GameManager.Instance.notificator.RemoveNotification(this);
+        }
         else 
             Instantiate(idleEvent, transform);
         GameManager.Instance.SetState(GameState.Event);
@@ -133,7 +143,7 @@ public class Robot : MonoBehaviour
         {
             Transfer();
             return;
-        }
+        } 
         Instantiate(transferEvent, transform);
     }
 
@@ -145,6 +155,17 @@ public class Robot : MonoBehaviour
         GameManager.Instance.robotWindow.Update();
     }
 
+    public bool SetNextEvent(GameObject eventPrefab)
+    {
+        if(nextEventPrefab == null)
+        {
+            nextEventPrefab = eventPrefab;
+            GameManager.Instance.notificator.InstantiateNotification(this);
+            return true;
+        }
+        return false;
+    }
+
     public void End()
     {
         animator.Play(fallAnimName);
@@ -152,6 +173,7 @@ public class Robot : MonoBehaviour
 
     private void HandleDeath()
     {
+        deathHandled = true;
         currentPower = 0;
 
         if (!sleeping)
@@ -159,6 +181,11 @@ public class Robot : MonoBehaviour
             animator.Play(fallAnimName);
         }
         StopParticles();
-        deathHandled = true;
+        GameManager.Instance.notificator.InstantiateNotification(this);
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.notificator.RemoveNotification(this);
     }
 }

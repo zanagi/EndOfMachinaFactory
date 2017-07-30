@@ -20,7 +20,7 @@ public class CycleCounter : MonoBehaviour {
         if (!GameManager.Instance.Idle)
             return;
 
-        currentValue += 1;
+        // currentValue += 1;
         CheckCycleOverflow();
         cycleMeter.fillAmount = currentValue / cycleLength;
 	}

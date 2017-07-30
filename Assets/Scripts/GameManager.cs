@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour {
     public CycleCounter cycleCounter;
     public RobotInfoWindow robotWindow;
     public ResourceContainer resourceContainer;
+    public EventNotificator notificator;
     public Light dLight;
 
     private void Awake () {
@@ -66,6 +67,8 @@ public class GameManager : MonoBehaviour {
         var robots = FindObjectsOfType<Robot>();
         foreach (var robot in robots)
             robot.End();
+        notificator.Clear();
+        robotWindow.Close(true);
     }
 
     public bool Idle
