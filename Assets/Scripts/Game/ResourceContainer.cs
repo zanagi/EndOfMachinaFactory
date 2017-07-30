@@ -18,9 +18,8 @@ public class ResourceContainer : MonoBehaviour
             if(counter.resource == resource)
             {
                 counter.ChangeResourceCount(1);
-
-                if(resource.IsBasic())
-                    GenerateResourceObject(resource, slideArea);
+                GenerateResourceObject(resource, slideArea);
+                GameManager.Instance.cycleCounter.AddValue(resource.IsBasic());
                 return;
             }
         }
@@ -29,7 +28,8 @@ public class ResourceContainer : MonoBehaviour
     private void GenerateResourceObject(Resource resource, SlideArea slideArea)
     {
         var resourcePrefab = (resource == Resource.X) ? ContentManager.Instance.xResourceObject 
-                                : (resource == Resource.Y) ? ContentManager.Instance.yResourceObject : ContentManager.Instance.zResourceObject;
+                                : (resource == Resource.Y) ? ContentManager.Instance.yResourceObject 
+                                : (resource == Resource.Z) ? ContentManager.Instance.zResourceObject : ContentManager.Instance.xyzResourceObject;
         var temp = Instantiate(resourcePrefab, slideArea.transform);
         temp.transform.position = slideArea.start.position;
         temp.slideArea = slideArea;

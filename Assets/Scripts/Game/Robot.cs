@@ -4,7 +4,7 @@ using System.Collections;
 public class Robot : MonoBehaviour
 {
     private static float sleepModifier = 0.2f;
-    private static string fallAnimName = "Fall", riseAnimName = "Rise";
+    private static string fallAnimName = "Fall", riseAnimName = "Rise", idleAnimName="Idle";
 
     public Transform modelTransform;
 
@@ -17,7 +17,6 @@ public class Robot : MonoBehaviour
     [SerializeField]
     private float maxPower = 1000.0f;
     private float currentPower;
-    
     public float PowerRatio
     {
         get { return currentPower / maxPower; }
@@ -32,12 +31,17 @@ public class Robot : MonoBehaviour
         get { return sleeping; }
     }
 
-    // VN
+    // VN (prefabs)
     [SerializeField]
     private VNTextEvent idleEvent;
+    [SerializeField]
+    private GameObject transferEvent;
+    [SerializeField]
+    private GameObject deathEvent;
 
     // Animator
     private Animator animator;
+    private bool animationPaused;
 
     // Particles
     [SerializeField]
@@ -53,9 +57,25 @@ public class Robot : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        if (!GameManager.Instance.Idle || IsDead)
+        if (!GameManager.Instance.Idle)
         {
+            if(!animationPaused)
+            {
+                animationPaused = true;
+                animator.speed = 0.0f;
+            }
             StopParticles();
+            return;
+        }
+        if(animationPaused)
+        {
+            animationPaused = false;
+            animator.speed = 1.0f;
+        }
+        // Check if out of power
+        if (IsDead)
+        {
+            HandleDeath();
             return;
         }
 
@@ -71,18 +91,6 @@ public class Robot : MonoBehaviour
         // Update particle system activity
         sleepPS.SetActive(sleeping);
         transferPS.SetActive(!sleeping);
-
-        // Check if out of power
-        if (currentPower <= 0)
-        {
-            currentPower = 0;
-
-            if(!sleeping)
-            {
-                animator.Play(fallAnimName);
-            }
-            StopParticles();
-        }
     }
 
     private void StopParticles()
@@ -106,8 +114,33 @@ public class Robot : MonoBehaviour
         if (!idleEvent)
             return;
 
-        Instantiate(idleEvent, transform);
+        if(IsDead)
+            Instantiate(deathEvent, transform);
+        else 
+            Instantiate(idleEvent, transform);
         GameManager.Instance.SetState(GameState.Event);
+    }
+
+    public void SwapSleep()
+    {
+        sleeping = !sleeping;
+        animator.Play(sleeping ? fallAnimName : riseAnimName);
+    }
+
+    public void ActivateTransfer()
+    {
+        if(!transferEvent)
+        {
+            Transfer();
+            return;
+        }
+        Instantiate(transferEvent, transform);
+    }
+
+    public void Transfer()
+    {
+        GameManager.Instance.battery.AddPower(currentPower);
+        currentPower = 0;
     }
 
     public void End()
@@ -115,9 +148,14 @@ public class Robot : MonoBehaviour
         animator.Play(fallAnimName);
     }
 
-    public void SwapSleep()
+    private void HandleDeath()
     {
-        sleeping = !sleeping;
-        animator.Play(sleeping ? fallAnimName : riseAnimName);
+        currentPower = 0;
+
+        if (!sleeping)
+        {
+            animator.Play(fallAnimName);
+        }
+        StopParticles();
     }
 }

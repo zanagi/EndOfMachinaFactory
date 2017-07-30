@@ -16,15 +16,15 @@ public class RobotInfoWindow : MonoBehaviour
     private Button sleepButton;
     [SerializeField]
     private Button transferButton;
-
-    private void Start()
-    {
-        gameObject.SetActive(false);
-    }
-
+    
     private void Update()
     {
-        if (!GameManager.Instance.Idle || !robot)
+        if (!robot)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+        if (!GameManager.Instance.Idle)
             return;
 
         UpdatePosition();
@@ -76,5 +76,10 @@ public class RobotInfoWindow : MonoBehaviour
     public void SwapRobotSleep()
     {
         robot.SwapSleep();
+    }
+
+    public void Transfer()
+    {
+        robot.ActivateTransfer();
     }
 }

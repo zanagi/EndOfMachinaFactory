@@ -5,31 +5,38 @@ using UnityEngine.UI;
 
 public class CycleCounter : MonoBehaviour {
 
+    private static readonly int basicValue = 10, xyzValue = 150, cycleLength = 300;
+
     [SerializeField]
     private Image cycleMeter;
-
     [SerializeField]
     private Text cycleCountText;
-    
-    [SerializeField]
-    private float cycleLength;
 
-    private float currentCycleTime;
+    private float currentValue;
     private int cycleCount;
     
 	// Update is called once per frame
-	void FixedUpdate () {
+	private void FixedUpdate () {
         if (!GameManager.Instance.Idle)
             return;
 
-        currentCycleTime += Time.fixedDeltaTime * GameManager.Instance.gameSpeed;
-        
-        if(currentCycleTime >= cycleLength)
+        currentValue += 1;
+        CheckCycleOverflow();
+        cycleMeter.fillAmount = currentValue / cycleLength;
+	}
+
+    public void AddValue(bool isBasicResource)
+    {
+        currentValue += isBasicResource ? basicValue : xyzValue;
+    }
+
+    private void CheckCycleOverflow()
+    {
+        if (currentValue >= cycleLength)
         {
-            currentCycleTime -= cycleLength;
+            currentValue -= cycleLength;
             cycleCount += 1;
             cycleCountText.text = cycleCount.ToString();
         }
-        cycleMeter.fillAmount = currentCycleTime / cycleLength;
-	}
+    }
 }

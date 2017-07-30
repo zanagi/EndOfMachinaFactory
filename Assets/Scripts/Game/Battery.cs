@@ -16,14 +16,27 @@ public class Battery : MonoBehaviour
         currentPower = maxPower;
     }
     
-    public void UpdatePower(float consumption)
+    public void ReducePower(float consumption)
     {
         currentPower -= consumption * GameManager.Instance.gameSpeed;
-        fillImage.fillAmount = currentPower / maxPower;
+        UpdateFill();
 
-        if(currentPower <= 0)
+        if (currentPower <= 0)
         {
             GameManager.Instance.End();
         }
+    }
+
+    public void AddPower(float amount)
+    {
+        if (amount <= 0)
+            return;
+        currentPower = Mathf.Min(maxPower, currentPower + amount);
+        UpdateFill();
+    }
+
+    private void UpdateFill()
+    {
+        fillImage.fillAmount = currentPower / maxPower;
     }
 }

@@ -22,7 +22,7 @@ public class Factory : MonoBehaviour
         if (!GameManager.Instance.Idle)
             return;
 
-        GameManager.Instance.battery.UpdatePower(powerConsumption);
+        GameManager.Instance.battery.ReducePower(powerConsumption);
     }
 
     private void LateUpdate()

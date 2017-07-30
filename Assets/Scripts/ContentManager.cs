@@ -13,7 +13,7 @@ public class ContentManager : MonoBehaviour
     public Sprite[] sprites;
 
     // Resource object prefabs
-    public ResourceObject xResourceObject, yResourceObject, zResourceObject;
+    public ResourceObject xResourceObject, yResourceObject, zResourceObject, xyzResourceObject;
 
     void Awake()
     {
