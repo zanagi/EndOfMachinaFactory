@@ -39,6 +39,7 @@ public class EventNotificator : MonoBehaviour {
 
     public void Clear()
     {
+        Destroy(backTransform.gameObject);
         Destroy(gameObject);
     }
 }

@@ -4,7 +4,7 @@ using System.Collections;
 public class XYZMachine : Machine
 {
     private static readonly int requiredResourceCount = 10;
-    private bool resourcesTaken = true;
+    private bool resourcesTaken;
 
     public override void AddProgress(float amount)
     {
