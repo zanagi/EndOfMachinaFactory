@@ -41,8 +41,7 @@ public class Robot : MonoBehaviour
 
     // Animator
     private Animator animator;
-    private bool animationPaused;
-    private bool deathHandled;
+    private bool animationPaused, deathHandled, hasNewEvent;
 
     // Particles
     [SerializeField]
