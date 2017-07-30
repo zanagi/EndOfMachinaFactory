@@ -10,9 +10,10 @@ public class VNManager : MonoBehaviour {
 
     [SerializeField]
     private VNImagePanel imagePanel;
-    
     [SerializeField]
     private VNTextPanel textPanel;
+    [SerializeField]
+    private GameObject blockPanel;
 
     private Type currentActionType;
 
@@ -52,6 +53,7 @@ public class VNManager : MonoBehaviour {
         {
             SetImage(action as VNImageAction);
         }
+        blockPanel.SetActive(true);
     }
 
     public void CompleteCurrentText()
@@ -62,6 +64,7 @@ public class VNManager : MonoBehaviour {
     public void Hide()
     {
         textPanel.Hide();
+        blockPanel.SetActive(false);
     }
 
     public bool ActionComplete

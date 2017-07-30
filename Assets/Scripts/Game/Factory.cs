@@ -34,15 +34,11 @@ public class Factory : MonoBehaviour
         {
             // Raycast to see if machine/robot clicked
             RaycastHit hit;
-
-            Debug.Log("CLicked");
             if (Physics.Raycast(Camera.main.ScreenPointToRay(InputHandler.Instance.TouchPosition), out hit, 100.0f))
             {
-                Debug.Log("CLicked: " + hit.transform.name);
                 Robot robot = hit.transform.GetComponent<Robot>();
                 if(robot)
                 {
-                    Debug.Log("Hit: " + robot.name);
                     GameManager.Instance.robotWindow.SetRobot(robot);
                 }
             }

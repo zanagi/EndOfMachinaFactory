@@ -20,6 +20,10 @@ public class Robot : MonoBehaviour
         get { return currentPower / maxPower; }
     }
 
+    // VN
+    [SerializeField]
+    private VNTextEvent idleEvent;
+
     private void Start()
     {
         currentPower = maxPower;
@@ -47,5 +51,14 @@ public class Robot : MonoBehaviour
     public void SetPowerConsumption(int consumption)
     {
         this.consumption = consumption;
+    }
+
+    public void ActivateDialogue()
+    {
+        if (!idleEvent)
+            return;
+
+        Instantiate(idleEvent, transform);
+        GameManager.Instance.SetState(GameState.Event);
     }
 }

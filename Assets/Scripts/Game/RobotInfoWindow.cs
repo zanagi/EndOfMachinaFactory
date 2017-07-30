@@ -14,6 +14,9 @@ public class RobotInfoWindow : MonoBehaviour
     
     private void Update()
     {
+        if (!GameManager.Instance.Idle)
+            return;
+
         UpdatePosition();
         UpdateBattery();
     }
@@ -30,6 +33,9 @@ public class RobotInfoWindow : MonoBehaviour
 
     public void Close()
     {
+        if (!GameManager.Instance.Idle)
+            return;
+
         gameObject.SetActive(false);
     }
 
@@ -42,5 +48,10 @@ public class RobotInfoWindow : MonoBehaviour
 
         // Show window (if needed)
         gameObject.SetActive(true);
+    }
+
+    public void ActivateDialogue()
+    {
+        robot.ActivateDialogue();
     }
 }

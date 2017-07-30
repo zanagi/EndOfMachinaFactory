@@ -113,6 +113,7 @@ public class VNTextPanel : MonoBehaviour {
     public void CompleteText()
     {
         text.text = targetText;
+        textIndex = targetText.Length;
     }
 
     public bool Complete
