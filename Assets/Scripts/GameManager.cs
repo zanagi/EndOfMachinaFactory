@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour {
     public Transform canvasTransform;
     public Battery battery;
     public CycleCounter cycleCounter;
+    public RobotInfoWindow robotWindow;
     public ResourceContainer resourceContainer;
     public Light dLight;
 

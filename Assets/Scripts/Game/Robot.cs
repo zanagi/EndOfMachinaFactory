@@ -13,6 +13,11 @@ public class Robot : MonoBehaviour
     private float maxPower = 1000.0f;
     private float currentPower;
 
+    public float PowerRatio
+    {
+        get { return currentPower / maxPower; }
+    }
+
     private void Start()
     {
         currentPower = maxPower;
