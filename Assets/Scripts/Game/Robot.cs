@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Robot : MonoBehaviour
 {
+    public Transform modelTransform;
+
     [SerializeField]
     private Machine machine;
     [SerializeField]
@@ -12,7 +14,7 @@ public class Robot : MonoBehaviour
     [SerializeField]
     private float maxPower = 1000.0f;
     private float currentPower;
-
+    
     public float PowerRatio
     {
         get { return currentPower / maxPower; }

@@ -20,7 +20,7 @@ public class RobotInfoWindow : MonoBehaviour
 
     private void UpdatePosition()
     {
-        transform.position = Camera.main.WorldToScreenPoint(robot.transform.position) + positionToRobot;
+        transform.position = Camera.main.WorldToScreenPoint(robot.modelTransform.position) + positionToRobot;
     }
 
     private void UpdateBattery()
